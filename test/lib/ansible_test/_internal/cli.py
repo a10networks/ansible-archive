@@ -92,15 +92,30 @@ from .util_common import (
     CommonConfig,
 )
 
-from .cover import (
+from .coverage.combine import (
     command_coverage_combine,
+)
+
+from .coverage.erase import (
     command_coverage_erase,
+)
+
+from .coverage.html import (
     command_coverage_html,
+)
+
+from .coverage.report import (
     command_coverage_report,
+    CoverageReportConfig,
+)
+
+from .coverage.xml import (
     command_coverage_xml,
+)
+
+from .coverage import (
     COVERAGE_GROUPS,
     CoverageConfig,
-    CoverageReportConfig,
 )
 
 
@@ -643,6 +658,12 @@ def add_environments(parser, isolated_delegation=True):
                         default=None,
                         help='path to the docker or remote python interpreter')
 
+    parser.add_argument('--no-pip-check',
+                        dest='pip_check',
+                        default=True,
+                        action='store_false',
+                        help='do not run "pip check" to verify requirements')
+
     environments = parser.add_mutually_exclusive_group()
 
     environments.add_argument('--local',
@@ -801,6 +822,7 @@ def complete_target(prefix, parsed_args, **_):
     return find_target_completion(parsed_args.targets, prefix)
 
 
+# noinspection PyUnusedLocal
 def complete_remote(prefix, parsed_args, **_):
     """
     :type prefix: unicode
@@ -814,6 +836,7 @@ def complete_remote(prefix, parsed_args, **_):
     return [i for i in images if i.startswith(prefix)]
 
 
+# noinspection PyUnusedLocal
 def complete_remote_shell(prefix, parsed_args, **_):
     """
     :type prefix: unicode
@@ -831,6 +854,7 @@ def complete_remote_shell(prefix, parsed_args, **_):
     return [i for i in images if i.startswith(prefix)]
 
 
+# noinspection PyUnusedLocal
 def complete_docker(prefix, parsed_args, **_):
     """
     :type prefix: unicode
@@ -890,6 +914,7 @@ def complete_network_testcase(prefix, parsed_args, **_):
     return testcases
 
 
+# noinspection PyUnusedLocal
 def complete_sanity_test(prefix, parsed_args, **_):
     """
     :type prefix: unicode
