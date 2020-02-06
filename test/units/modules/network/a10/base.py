@@ -10,7 +10,8 @@ __metaclass__ = type
 import os
 import json
 
-from units.modules.utils import AnsibleExitJson, AnsibleFailJson, ModuleTestCase
+from units.modules.utils import AnsibleExitJson, AnsibleFailJson
+from units.modules.utils import ModuleTestCase
 
 fixture_path = os.path.join(os.path.dirname(__file__), 'fixtures')
 fixture_data = {}
@@ -36,7 +37,8 @@ def load_fixture(name):
 
 class TestAcosModule(ModuleTestCase):
 
-    def execute_module(self, failed=False, changed=False, commands=None, sort=True, defaults=False):
+    def execute_module(self, failed=False, changed=False, commands=None,
+                       sort=True, defaults=False):
 
         self.load_fixtures(commands)
 
@@ -49,9 +51,11 @@ class TestAcosModule(ModuleTestCase):
 
         if commands is not None:
             if sort:
-                self.assertEqual(sorted(commands), sorted(result['commands']), result['commands'])
+                self.assertEqual(sorted(commands), sorted(
+                    result['commands']), result['commands'])
             else:
-                self.assertEqual(commands, result['commands'], result['commands'])
+                self.assertEqual(
+                    commands, result['commands'], result['commands'])
 
         return result
 
