@@ -20,8 +20,8 @@ description:
     read from the device.
   - This module does not support running commands in configuration mode.
     Please use M(acos_config) to configure ACOS devices.
-notes:
-  - Tested against ACOS 4.1.1-P9
+version_added: '2.10'
+author: Hunter Thompson (@hthompson6)
 options:
   commands:
     description:
@@ -67,10 +67,16 @@ options:
         conditions, the interval indicates how long to wait before
         trying the command again.
     default: 1
+notes:
+  - Tested against ACOS 4.1.1-P9
 '''
 
 EXAMPLES = r'''
   tasks:
+    - name: run 'show version' command
+      acos_command:
+        commands: show version
+
     - name: run commands that requires answering a prompt
       acos_command:
         commands:
@@ -104,21 +110,6 @@ EXAMPLES = r'''
         commands: show version
         wait_for: result[0] contains ACOS
         retries: 10
-
-    - name: run multiple sequential commands on ACOS device
-      acos_command:
-        commands:
-          - command: 'configure'
-          - command: 'slb server slb1 10.43.24.17'
-          - command: 'exit'
-
-    - name: run multiple sequential commands on ACOS device with check_mode
-      acos_command:
-        commands:
-          - command: 'configure'
-          - command: 'slb server slb2 10.43.24.18'
-          - command: 'exit'
-      check_mode: 'yes'
 '''
 
 RETURN = r'''
@@ -138,6 +129,8 @@ failed_conditions:
   type: list
   sample: ['...', '...']
 '''
+
+__metaclass__ = type
 
 import time
 
