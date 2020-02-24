@@ -140,7 +140,6 @@ from ansible.module_utils.network.common.parsing import Conditional
 from ansible.module_utils.network.common.utils import transform_commands
 from ansible.module_utils.network.common.utils import to_lines
 from ansible.module_utils.network.a10.acos import run_commands
-from ansible.module_utils.network.a10.acos import acos_argument_spec
 
 
 def parse_commands(module, warnings):
@@ -179,7 +178,6 @@ def main():
         retries=dict(default=10, type='int'),
         interval=dict(default=1, type='int')
     )
-    argument_spec.update(acos_argument_spec)
 
     module = AnsibleModule(argument_spec=argument_spec,
                            supports_check_mode=True)
