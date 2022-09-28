@@ -1,5 +1,7 @@
 |PyPI version| |Docs badge| |Chat badge| |Build Status| |Code Of Conduct| |Mailing Lists| |License|
 
+**This repo is archived and may be removed in the future.**
+
 *******
 Ansible
 *******
